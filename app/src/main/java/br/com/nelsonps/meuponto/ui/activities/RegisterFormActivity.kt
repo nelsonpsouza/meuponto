@@ -1,15 +1,14 @@
-package br.com.nelsonps.meuponto.ui.activites
+package br.com.nelsonps.meuponto.ui.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import br.com.nelsonps.meuponto.ui.screens.HomeScreen
 
-class MainActivity : ComponentActivity() {
+class RegisterFormActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            HomeScreen()
+        setContent{
+
         }
     }
 }
