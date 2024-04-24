@@ -5,5 +5,5 @@ data class Register(
     //posteriormente, será migrado para a classe WorkShift
     val day: String = "",
     val hour: String = "",
-    val comments: String = ""
+    val comment: String = ""
 )

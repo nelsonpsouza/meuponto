@@ -7,35 +7,44 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.nelsonps.meuponto.dao.RegisterDao
-import br.com.nelsonps.meuponto.model.Register
+import br.com.nelsonps.meuponto.ui.states.RegisterFormUIState
+import br.com.nelsonps.meuponto.ui.theme.MeuPontoTheme
+import br.com.nelsonps.meuponto.ui.viewmodels.RegisterFormViewModel
 
 @Composable
 fun RegisterFormScreen(
-    day: String = "",
-    hour: String = "",
-    comment: String = "",
+    viewModel: RegisterFormViewModel,
+    onSaveClick: () -> Unit = {}
+){
+    val state by viewModel.uiState.collectAsState()
+    RegisterFormScreen(
+        state = state,
+        onSaveClick = {
+            viewModel.save()
+            onSaveClick()
+        }
+    )
+}
+@Composable
+fun RegisterFormScreen(
+    state: RegisterFormUIState = RegisterFormUIState(),
     onSaveClick: () -> Unit = {}
 ) {
-    val h = rememberSaveable {
-        mutableStateOf(hour)
-    }
-    val c = rememberSaveable {
-        mutableStateOf(comment)
-    }
-    val dao = RegisterDao()
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,28 +59,36 @@ fun RegisterFormScreen(
             fontSize = 28.sp,
         )
         Text(
-            text = day,
+            text = state.day,
             modifier = Modifier.fillMaxWidth(),
             fontSize = 28.sp,
         )
         TextField(
-            value = h.value,
-            onValueChange = { newHour -> h.value = newHour },
+            value = state.hour,
+            onValueChange = state.onHourChange,
+            modifier = Modifier.fillMaxWidth(),
+            label = {
+                Text(text = "Horário")
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next,
+            ),
         )
         TextField(
-            value = c.value,
-            onValueChange = { newComment -> c.value = newComment },
+            value = state.comment,
+            onValueChange = state.onCommentChange,
+            modifier = Modifier.fillMaxWidth(),
+            label = {
+                Text(text = "Comentário")
+            },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+            ),
         )
         Button(
-            onClick = {
-                val register = Register (
-                    day = day,
-                    hour = h.value,
-                    comments = c.value
-                )
-                dao.save(register)
-                onSaveClick()
-            },
+            onClick = onSaveClick,
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(text = "Salvar")
@@ -83,9 +100,15 @@ fun RegisterFormScreen(
 @Preview
 @Composable
 private fun RegisterFormScreenPreview() {
-    RegisterFormScreen(
-        day = "24/08/2024",
-        hour = "10:00",
-        comment = "Esquecimento",
-    )
+    MeuPontoTheme {
+        Surface {
+            RegisterFormScreen(
+                    RegisterFormUIState(
+                    day = "24/08/2024",
+                    hour = "10:00",
+                    comment = "Esquecimento",
+                )
+            )
+        }
+    }
 }

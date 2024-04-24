@@ -33,7 +33,7 @@ fun HourItem(
                 fontSize = 16.sp
             )
             Text(
-                text = register.comments,
+                text = register.comment,
                 fontSize = 10.sp,
             )
         }
@@ -47,7 +47,7 @@ fun HoraItemPreview() {
         register = Register(
             day = "24/04/2024",
             hour = "10:00",
-            comments = "Esquecimento",
+            comment = "Esquecimento",
         ),
         modifier = Modifier.padding(16.dp),
     )
