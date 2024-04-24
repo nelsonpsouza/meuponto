@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import br.com.nelsonps.meuponto.R
 
 @Composable
-fun HoraItem(
-    hora: String,
+fun HourItem(
+    hour: String,
     modifier: Modifier = Modifier,
 ) {
     Row (modifier = modifier){
@@ -25,7 +25,7 @@ fun HoraItem(
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = hora
+            text = hour
         )
     }
 }
@@ -33,7 +33,8 @@ fun HoraItem(
 @Preview
 @Composable
 fun HoraItemPreview() {
-    val modifier = Modifier
-        .padding(16.dp)
-    HoraItem(hora = "10:00", modifier)
+    HourItem(
+        hour = "10:00",
+        modifier = Modifier.padding(16.dp),
+    )
 }
