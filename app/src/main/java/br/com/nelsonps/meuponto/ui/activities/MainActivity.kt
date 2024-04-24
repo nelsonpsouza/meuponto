@@ -17,12 +17,17 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import br.com.alura.aluvery.sampledata.sampleRegisters
+import br.com.nelsonps.meuponto.dao.RegisterDao
 import br.com.nelsonps.meuponto.ui.screens.HomeScreen
 import br.com.nelsonps.meuponto.ui.theme.MeuPontoTheme
 
 class MainActivity : ComponentActivity() {
+    private val dao = RegisterDao()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val registers = dao.registers().value
+
         setContent {
             App(
                 onFabClick = {
@@ -34,7 +39,7 @@ class MainActivity : ComponentActivity() {
                     )
                 },
                 content = {
-                    HomeScreen()
+                    HomeScreen(registers)
                 }
             )
         }
@@ -71,6 +76,6 @@ fun App(
 @Composable
 private fun AppPreview() {
     App {
-        HomeScreen()
+        HomeScreen(sampleRegisters)
     }
 }

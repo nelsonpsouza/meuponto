@@ -8,21 +8,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.alura.aluvery.sampledata.sampleHours
+import br.com.alura.aluvery.sampledata.sampleRegisters
+import br.com.nelsonps.meuponto.model.Register
 import br.com.nelsonps.meuponto.ui.components.HourList
 import br.com.nelsonps.meuponto.ui.theme.MeuPontoTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(hourList: List<Register>) {
     MeuPontoTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
             HourList(
-                day = "24/04/2024",
-                hours = sampleHours,
                 modifier = Modifier.padding(8.dp),
+                day = "24/04/2024",
+                registers = hourList,
             )
         }
     }
@@ -31,5 +32,5 @@ fun HomeScreen() {
 @Preview
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen()
+    HomeScreen(sampleRegisters)
 }
