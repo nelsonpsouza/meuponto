@@ -45,7 +45,7 @@ fun HourItem(
 fun HoraItemPreview() {
     HourItem(
         register = Register(
-            day = "24/04/2024",
+            date = "24/04/2024",
             hour = "10:00",
             comment = "Esquecimento",
         ),

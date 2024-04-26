@@ -17,6 +17,7 @@ class RegisterFormActivity : ComponentActivity() {
                 Surface {
                     val viewModel by viewModels<RegisterFormViewModel>()
                     RegisterFormScreen(
+                        date = "2024-04-26",
                         viewModel = viewModel,
                         onSaveClick = {
                             finish()
