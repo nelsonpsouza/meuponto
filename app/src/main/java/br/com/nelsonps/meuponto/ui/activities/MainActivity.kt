@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                 },
                 content = {
                     val viewModel by viewModels<HomeScreenViewModel>()
-                    HomeScreen("2024-04-26", viewModel)
+                    HomeScreen(viewModel)
                 }
             )
         }
@@ -76,11 +76,6 @@ fun App(
 @Composable
 private fun AppPreview() {
     App {
-        HomeScreen(
-            state = HomeScreenUIState(
-                date = "2024-04-26",
-                registers = sampleRegisters.filter { d -> d.date == "2024-04-26" }
-            )
-        )
+        HomeScreen(HomeScreenUIState(registers = sampleRegisters))
     }
 }

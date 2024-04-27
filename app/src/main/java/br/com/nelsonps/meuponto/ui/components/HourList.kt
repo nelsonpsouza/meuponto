@@ -19,12 +19,12 @@ import br.com.nelsonps.meuponto.model.Register
 @Composable
 fun HourList(
     modifier: Modifier = Modifier,
-    date: String = "",
+    day: String = "",
     registers: List<Register> = emptyList(),
 ) {
     Column(modifier = modifier) {
         Text(
-            text = date,
+            text = day,
             modifier = Modifier.padding(
                 start = 16.dp,
                 end = 16.dp
@@ -49,7 +49,7 @@ fun HourList(
 fun HourListPreview() {
     HourList(
         modifier = Modifier.padding(8.dp),
-        date = "26/04/2024",
-        registers = sampleRegisters.filter { d -> d.date == "2024-04-26" },
+        day = "24/04/2024",
+        registers = sampleRegisters,
     )
 }

@@ -16,21 +16,19 @@ import br.com.nelsonps.meuponto.ui.viewmodels.HomeScreenViewModel
 
 @Composable
 fun HomeScreen(
-    date: String,
     viewModel: HomeScreenViewModel
 ) {
     val state by viewModel.uiState.collectAsState()
-    HomeScreen(date = date, state = state)
+    HomeScreen(state = state)
 }
 
 @Composable
 fun HomeScreen(
-    date: String = "",
-    state: HomeScreenUIState = HomeScreenUIState(date)
+    state: HomeScreenUIState = HomeScreenUIState()
 ) {
     HourList(
         modifier = Modifier.padding(8.dp),
-        date = state.date,
+        day = state.day,
         registers = state.registers,
     )
 }
@@ -40,12 +38,7 @@ fun HomeScreen(
 fun HomeScreenPreview() {
     MeuPontoTheme {
         Surface {
-            HomeScreen(
-                state = HomeScreenUIState(
-                    date = "2024-04-26",
-                    registers = sampleRegisters.filter { d -> d.date == "2024-04-26" }
-                )
-            )
+            HomeScreen(HomeScreenUIState(registers = sampleRegisters))
         }
     }
 }

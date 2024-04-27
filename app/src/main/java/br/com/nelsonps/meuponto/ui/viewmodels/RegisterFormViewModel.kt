@@ -19,9 +19,9 @@ class RegisterFormViewModel: ViewModel() {
     init {
         _uiState.update { currentState ->
             currentState.copy(
-                onDateChange = {
+                onDayChange = {
                     _uiState.value = _uiState.value.copy(
-                        date = it
+                        day = it
                     )
                 },
                 onHourChange = {
@@ -40,7 +40,7 @@ class RegisterFormViewModel: ViewModel() {
     fun save() {
         _uiState.value.run {
             val register = Register(
-                date = date,
+                day = day,
                 hour = hour,
                 comment = comment
             )

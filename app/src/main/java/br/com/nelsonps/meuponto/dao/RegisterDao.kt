@@ -13,12 +13,6 @@ class RegisterDao {
 
     fun registers(): StateFlow<List<Register>> = registers.asStateFlow()
 
-//    fun registers(date: String): StateFlow<List<Register>> {
-//        // Filtrar os registros com base na data
-//        val filteredRegisters = registers.value.filter { it.date == date }
-//        return MutableStateFlow(filteredRegisters).asStateFlow()
-//    }
-
     fun save(register: Register) {
         registers.value += register
     }

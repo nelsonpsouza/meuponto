@@ -28,13 +28,11 @@ import br.com.nelsonps.meuponto.ui.viewmodels.RegisterFormViewModel
 
 @Composable
 fun RegisterFormScreen(
-    date: String,
     viewModel: RegisterFormViewModel,
     onSaveClick: () -> Unit = {}
 ){
     val state by viewModel.uiState.collectAsState()
     RegisterFormScreen(
-        date = date,
         state = state,
         onSaveClick = {
             viewModel.save()
@@ -44,8 +42,7 @@ fun RegisterFormScreen(
 }
 @Composable
 fun RegisterFormScreen(
-    date: String = "",
-    state: RegisterFormUIState = RegisterFormUIState(date),
+    state: RegisterFormUIState = RegisterFormUIState(),
     onSaveClick: () -> Unit = {}
 ) {
     Column(
@@ -62,7 +59,7 @@ fun RegisterFormScreen(
             fontSize = 28.sp,
         )
         Text(
-            text = state.date,
+            text = state.day,
             modifier = Modifier.fillMaxWidth(),
             fontSize = 28.sp,
         )
@@ -106,11 +103,11 @@ private fun RegisterFormScreenPreview() {
     MeuPontoTheme {
         Surface {
             RegisterFormScreen(
-                    state = RegisterFormUIState(
-                        date = "24/08/2024",
-                        hour = "10:00",
-                        comment = "Esquecimento",
-                    )
+                    RegisterFormUIState(
+                    day = "24/08/2024",
+                    hour = "10:00",
+                    comment = "Esquecimento",
+                )
             )
         }
     }
