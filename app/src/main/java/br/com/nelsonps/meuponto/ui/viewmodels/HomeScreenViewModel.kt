@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class HomeScreenViewModel: ViewModel() {
+class HomeScreenViewModel(date: String): ViewModel() {
     private val dao = RegisterDao()
 
     private val _uiState: MutableStateFlow<HomeScreenUIState> = MutableStateFlow(
-        HomeScreenUIState()
+        HomeScreenUIState(date = date)
     )
     val uiState get() = _uiState.asStateFlow()
 

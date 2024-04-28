@@ -28,13 +28,11 @@ import br.com.nelsonps.meuponto.ui.viewmodels.RegisterFormViewModel
 
 @Composable
 fun RegisterFormScreen(
-    date: String,
     viewModel: RegisterFormViewModel,
     onSaveClick: () -> Unit = {}
 ){
     val state by viewModel.uiState.collectAsState()
     RegisterFormScreen(
-        date = date,
         state = state,
         onSaveClick = {
             viewModel.save()
@@ -44,8 +42,7 @@ fun RegisterFormScreen(
 }
 @Composable
 fun RegisterFormScreen(
-    date: String = "",
-    state: RegisterFormUIState = RegisterFormUIState(date),
+    state: RegisterFormUIState = RegisterFormUIState(),
     onSaveClick: () -> Unit = {}
 ) {
     Column(

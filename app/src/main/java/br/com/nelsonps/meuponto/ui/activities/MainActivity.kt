@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,11 +17,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.alura.aluvery.sampledata.sampleRegisters
 import br.com.nelsonps.meuponto.ui.screens.HomeScreen
 import br.com.nelsonps.meuponto.ui.states.HomeScreenUIState
 import br.com.nelsonps.meuponto.ui.theme.MeuPontoTheme
 import br.com.nelsonps.meuponto.ui.viewmodels.HomeScreenViewModel
+import br.com.nelsonps.meuponto.ui.viewmodels.HomeScreenViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +39,10 @@ class MainActivity : ComponentActivity() {
                     )
                 },
                 content = {
-                    val viewModel by viewModels<HomeScreenViewModel>()
-                    HomeScreen("2024-04-26", viewModel)
+//                    val viewModel by viewModels<HomeScreenViewModel>()
+                    val viewModel: HomeScreenViewModel =
+                        viewModel(factory = HomeScreenViewModelFactory("2024-04-27"))
+                    HomeScreen(viewModel)
                 }
             )
         }

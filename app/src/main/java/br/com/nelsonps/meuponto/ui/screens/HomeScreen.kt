@@ -16,17 +16,15 @@ import br.com.nelsonps.meuponto.ui.viewmodels.HomeScreenViewModel
 
 @Composable
 fun HomeScreen(
-    date: String,
     viewModel: HomeScreenViewModel
 ) {
     val state by viewModel.uiState.collectAsState()
-    HomeScreen(date = date, state = state)
+    HomeScreen(state = state)
 }
 
 @Composable
 fun HomeScreen(
-    date: String = "",
-    state: HomeScreenUIState = HomeScreenUIState(date)
+    state: HomeScreenUIState = HomeScreenUIState()
 ) {
     HourList(
         modifier = Modifier.padding(8.dp),
